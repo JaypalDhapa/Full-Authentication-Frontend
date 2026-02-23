@@ -1,6 +1,9 @@
 import { useState } from "react"
+import api from "../../utils/api"
+import { useNavigate } from "react-router-dom"
 
-function PersonalInfoStep({ email }) {
+function PersonalInfoStep({ email,userData,updateUserData }) {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -15,20 +18,39 @@ function PersonalInfoStep({ email }) {
     })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
     if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match")
+      alert("Passwords don'not match")
       return
     }
 
-    console.log({
-      email,
-      ...formData,
-    })
+    const finalData = {
+      email:userData.email,
+      otp:userData.otp,
+      firstName:formData.firstName,
+      lastName:formData.lastName,
+      password:formData.password
+    }
+    try{
 
-    // 👉 Send to backend here
+      console.log(finalData);
+      const res = await api.post("/register",finalData);
+      updateUserData({firstName:formData.firstName,lastName:formData.lastName,password:formData.password});
+      if(res.data.success){
+        localStorage.setItem("token", res.data.token);
+        navigate("/profile");
+      }
+
+    }catch(err){
+      console.log(err.response.data);
+      alert("err in final step")
+    }
+ 
+  
+
+    // Send to backend here
   }
 
   return (

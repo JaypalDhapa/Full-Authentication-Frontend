@@ -51,6 +51,7 @@ const OtpVerificationStep = ({userData,updateUserData,nextStep}) => {
       }
       nextStep()
     }catch(error){
+      alert(error.response.data.message);
       console.log("erro",error.response.data.message);
     }finally{
       setLoading(false);

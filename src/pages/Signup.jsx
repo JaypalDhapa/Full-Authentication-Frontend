@@ -5,7 +5,7 @@ import PersonalInfoStep from '../components/SignupSteps/PersonalInfoStep'
 
 const Signup = () => {
 
-  const [currentStep,setCurrentStep] = useState(3);
+  const [currentStep,setCurrentStep] = useState(1);
   const [userData,setUserData] = useState({
     email:"",
     otp:"",
