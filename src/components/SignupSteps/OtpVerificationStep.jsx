@@ -2,10 +2,12 @@ import React from 'react'
 import { useRef, useState } from "react"
 import api from '../../utils/api'
 import Loader from '../common/LoadingSpinner'
+import ErrorMessage from '../common/ErrorMessage'
 
 const OtpVerificationStep = ({userData,updateUserData,nextStep}) => {
 
   const [loading,setLoading] = useState(false);
+  const [error,setError] = useState("");
   const [otp, setOtp] = useState(new Array(6).fill(""))
   const inputRefs = useRef([])
 
@@ -51,7 +53,7 @@ const OtpVerificationStep = ({userData,updateUserData,nextStep}) => {
       }
       nextStep()
     }catch(error){
-      alert(error.response.data.message);
+      setError(error.response.data.message);
       console.log("erro",error.response.data.message);
     }finally{
       setLoading(false);
@@ -67,10 +69,10 @@ const OtpVerificationStep = ({userData,updateUserData,nextStep}) => {
       </h2>
 
       <p className="text-center text-gray-500 text-sm mb-6">
-        Enter the 6-digit code sent to your email
+        Enter the 6-digit code  we've emailed a one time security code to <strong>{userData.email}</strong>. Please enter it below
       </p>
 
-      <div className="flex justify-between gap-2 sm:gap-3 mb-6">
+      <div className="flex justify-between gap-2 sm:gap-3 mb-1 ">
         {otp.map((digit, index) => (
           <input
             key={index}
@@ -85,7 +87,9 @@ const OtpVerificationStep = ({userData,updateUserData,nextStep}) => {
         ))}
       </div>
 
-      <button onClick={handleVerify} className="cursor-pointer w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition font-medium">
+      <ErrorMessage message={error}/>
+
+      <button onClick={handleVerify} className="cursor-pointer w-full mt-6 bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition font-medium">
         {loading ? <Loader /> : "Verify Code"}
       </button>
 

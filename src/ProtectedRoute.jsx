@@ -1,15 +1,18 @@
 import { Navigate } from "react-router-dom";
 
-function ProtectedRoute({ children }) {
+const ProtectedRoute = async ({ children })=> {
   const token = localStorage.getItem("token");
 
-  // If no token → redirect to login
-  if (!token) {
-    return <Navigate to="/" replace />;
-  }
+  try{
+    const res = await api.get("/profile");
+    if(!res.data.success){
+    }
 
-  // If token exists → show page
-  return children;
+    return children;
+
+  }catch(err){
+    return <Navigate to="/signup" replace />;
+  }
 }
 
 export default ProtectedRoute;

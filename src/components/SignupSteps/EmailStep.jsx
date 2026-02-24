@@ -71,18 +71,24 @@ function EmailStep({userData,updateUserData,nextStep}) {
 <input
   type="email"
   placeholder="Enter your email"
-  className="w-full border border-gray-300 rounded-lg px-4 py-3 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+  className={`w-full rounded-lg px-4 py-3   focus:outline-none focus:ring-2 focus:ring-blue-500
+    ${error 
+      ? "border border-red-500 text-red-500 focus:ring-red-200"
+      :"border border-gray-300 text-black focus:ring-blue-500"
+    }`
+  }
   onChange={function(e){
     setEmail(e.target.value)
   }}
 />
 
-<button type="submit" className="w-full bg-blue-600 text-white rounded-lg py-3 hover:bg-blue-700 transition font-medium">
+<ErrorMessage message={error}/>
+
+<button type="submit" className="w-full bg-blue-600 text-white rounded-lg py-3 mt-4 hover:bg-blue-700 transition font-medium">
   {loading ? <Loader /> : "Continue with Email"}
 </button>
 </form>
 
-<ErrorMessage message={error}/>
 <ToastContainer/> 
 
       </div>

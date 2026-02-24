@@ -73,7 +73,7 @@ function PersonalInfoStep({ email,userData,updateUserData }) {
           </label>
           <input
             type="email"
-            value="jaypaldhapa@gmail.com"
+            value={userData.email}
             readOnly
             className="w-full mt-1 border border-gray-200 bg-gray-100 rounded-lg px-4 py-3 text-gray-500 cursor-not-allowed"
           />

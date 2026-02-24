@@ -14,7 +14,7 @@ const App = () => {
        path='/profile'
       element={
         <ProtectedRoute>
-          <Profile />
+          <Profile /> 
         </ProtectedRoute>
       } />
     </Routes>

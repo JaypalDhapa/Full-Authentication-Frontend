@@ -9,7 +9,7 @@ const profile = () => {
       };
   return (
     <body class="flex items-center justify-center h-screen">
-  <h1 class="text-3xl font-bold">Thank you Jaimin Bro 😍</h1>
+  <h1 class="text-3xl font-bold">Thank you</h1>
   <button onClick={handleLogout}>Logout</button>
 </body>
   )

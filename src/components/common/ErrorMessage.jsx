@@ -5,7 +5,7 @@ function ErrorMessage({message}){
     if(!message) return null;
 
     return (
-        <div className="error-container">
+        <div className="text-red-500 ">
             <div className="error-text">{message}</div>
         </div>
     )
